@@ -1,4 +1,3 @@
-
 context = ChefDK::Generator.context
 cookbook_dir = File.join(context.cookbook_root, context.cookbook_name)
 
@@ -21,31 +20,23 @@ end
 cookbook_file "#{cookbook_dir}/chefignore"
 
 if context.use_berkshelf
-
-  # Berks
   cookbook_file "#{cookbook_dir}/Berksfile" do
     action :create_if_missing
   end
 else
-
-  # Policyfile
   template "#{cookbook_dir}/Policyfile.rb" do
-    source "Policyfile.rb.erb"
+    source 'Policyfile.rb.erb'
     helpers(ChefDK::Generator::TemplateHelper)
   end
-
 end
-
 
 # TK & Serverspec
 template "#{cookbook_dir}/.kitchen.yml" do
-
   if context.use_berkshelf
     source 'kitchen.yml.erb'
   else
     source 'kitchen_policyfile.yml.erb'
   end
-
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing
 end
@@ -69,49 +60,51 @@ template "#{cookbook_dir}/test/integration/default/serverspec/default_spec.rb" d
   action :create_if_missing
 end
 
-# Chefspec
+# ChefSpec
+
+cookbook_file File.join(cookbook_dir, '.rspec') do
+  source '.rspec'
+  action :create_if_missing
+end
+
 directory "#{cookbook_dir}/spec/unit/recipes" do
   recursive true
 end
 
-cookbook_file "#{cookbook_dir}/spec/spec_helper.rb" do
-
-  if context.use_berkshelf
-    source "spec_helper.rb"
-  else
-    source "spec_helper_policyfile.rb"
-  end
-
+template File.join(cookbook_dir, 'spec', 'spec_helper.rb') do
+  source 'spec_spec_helper.rb.erb'
+  backup false
+  variables(
+    use_berkshelf: context.use_berkshelf
+  )
   action :create_if_missing
 end
 
 template "#{cookbook_dir}/spec/unit/recipes/default_spec.rb" do
-  source "recipe_spec.rb.erb"
+  source 'recipe_spec.rb.erb'
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing
 end
 
 # Recipes
-
 directory "#{cookbook_dir}/recipes"
 
 template "#{cookbook_dir}/recipes/default.rb" do
-  source "recipe.rb.erb"
+  source 'recipe.rb.erb'
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing
 end
 
 # git
 if context.have_git
-  if !context.skip_git_init
-
-    execute("initialize-git") do
-      command("git init .")
+  unless context.skip_git_init
+    execute('initialize-git') do
+      command('git init .')
       cwd cookbook_dir
     end
   end
 
   cookbook_file "#{cookbook_dir}/.gitignore" do
-    source "gitignore"
+    source 'gitignore'
   end
 end
