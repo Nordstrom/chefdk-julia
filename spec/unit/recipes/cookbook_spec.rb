@@ -19,7 +19,25 @@ RSpec.describe 'chefdk-julia::cookbook' do
   let(:new_cookbook_path) { '/Users/my_user/chef/cookbooks/my_cookbook' }
 
   it 'creates a stock .rspec config file if missing' do
-    expect(chef_run).to create_cookbook_file_if_missing(File.join(new_cookbook_path, '.rspec'))
+    expect(chef_run).to create_cookbook_file_if_missing(
+      File.join(new_cookbook_path, '.rspec')
+    )
+  end
+
+  it 'creates a Rakefile for running style and spec tests if missing' do
+    expect(chef_run).to create_cookbook_file_if_missing(
+      File.join(new_cookbook_path, 'Rakefile')
+    ).with(
+      backup: false
+    )
+  end
+
+  it 'creates a .rubocop.yml file' do
+    expect(chef_run).to create_cookbook_file_if_missing(
+      File.join(new_cookbook_path, '.rubocop.yml')
+    ).with(
+      backup: false
+    )
   end
 
   context 'when generating a cookbook which uses Berkshelf' do
