@@ -30,7 +30,7 @@ else
   end
 end
 
-# TK & Serverspec
+# Test-kitchen and ServerSpec
 template "#{cookbook_dir}/.kitchen.yml" do
   if context.use_berkshelf
     source 'kitchen.yml.erb'
@@ -45,6 +45,12 @@ directory "#{cookbook_dir}/test/integration/default/serverspec" do
   recursive true
 end
 
+template "#{cookbook_dir}/test/integration/default/serverspec/default_spec.rb" do
+  source 'serverspec_default_spec.rb.erb'
+  helpers(ChefDK::Generator::TemplateHelper)
+  action :create_if_missing
+end
+
 directory "#{cookbook_dir}/test/integration/helpers/serverspec" do
   recursive true
 end
@@ -54,14 +60,7 @@ cookbook_file "#{cookbook_dir}/test/integration/helpers/serverspec/spec_helper.r
   action :create_if_missing
 end
 
-template "#{cookbook_dir}/test/integration/default/serverspec/default_spec.rb" do
-  source 'serverspec_default_spec.rb.erb'
-  helpers(ChefDK::Generator::TemplateHelper)
-  action :create_if_missing
-end
-
 # ChefSpec
-
 cookbook_file File.join(cookbook_dir, '.rspec') do
   source '.rspec'
   action :create_if_missing
@@ -83,6 +82,19 @@ end
 template "#{cookbook_dir}/spec/unit/recipes/default_spec.rb" do
   source 'recipe_spec.rb.erb'
   helpers(ChefDK::Generator::TemplateHelper)
+  action :create_if_missing
+end
+
+# Rakefile
+cookbook_file File.join(cookbook_dir, 'Rakefile') do
+  source 'Rakefile'
+  backup false
+  action :create_if_missing
+end
+
+cookbook_file File.join(cookbook_dir, '.rubocop.yml') do
+  source '.rubocop.yml'
+  backup false
   action :create_if_missing
 end
 
