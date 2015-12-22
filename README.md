@@ -11,8 +11,7 @@ Julia is a special type of Chef cookbook that is designed to generate code
 (cookbooks, templates, etc).
 
 It is based upon the default code_generator cookbook introduced in ChefDK 0.9.0
-(`chef generate generator`) and is meant to be a
-simplified successor to chef-gen-flavors.
+(`chef generate generator`).
 
 ## Installation
 For now, we're recommending grabbing the latest version from git:
