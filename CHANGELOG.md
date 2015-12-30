@@ -1,5 +1,8 @@
 # Changelog for chefdk-julia
 
+## 0.4.0
+* Distribute chefdk-julia as a Ruby gem.
+
 ## 0.3.0
 * Generated cookbook passes Rubocop, Foodcritic, and RSpec
 
