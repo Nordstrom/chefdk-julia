@@ -1,0 +1,29 @@
+sudo: false
+addons:
+  apt:
+    sources:
+      - chef-current-precise
+    packages:
+      - chefdk
+
+# Don't `bundle install`
+install: echo "skip bundle install"
+
+# Ensure we make ChefDK's Ruby the default
+before_script:
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  # We have to install chef-sugar for ChefSpec
+  - /opt/chefdk/embedded/bin/chef gem install chef-sugar
+script:
+  - /opt/chefdk/embedded/bin/chef --version
+  - /opt/chefdk/embedded/bin/rubocop --version
+  - /opt/chefdk/embedded/bin/foodcritic --version
+  - /opt/chefdk/embedded/bin/rake
+deploy:
+  provider: rubygems
+  api_key:
+    secure: O7A+pkPSZbtilVT9OIQuBYUGXWq53KBFCgCd/m6pMozsOE6bfb/nw3MQDH1MWd+uwODfvY5xwHTKDI8Eu7rgg9EycTjxF/GeGN8ISQSGHTrXngaDfVo7PBBNBmSAvKGBIWNaHB7gVddJzMbsdk31n6Tvvo16LylyScLyju2LpN9mm73rJV9dtWVs8t/KevW62rsa+B992eoFq9LwQ/gvSCzPFubM5BmRA741/YSDYOdvYuiHwnY1jKK9M84d+1LrdOfibZdPgmKJ78neieArIqpN0SlAokZKfY37VCWrCNxworNZlXXGVcyS3wEe/+iog+69Ud/k5qriG9JD1NkwaNbzT0DbFGvoj1zXKTSDG76V0/Om8S914Baaxy6nfVmzHl/X5G9Hr9I6+eGzzuVtO5kPeiEvtC074syhultqdLa59iK+2a3nZCdQ+cFwpXnxF96vUy5Vyp2G+FTBLuuvvdYRuNpUnjyzglzvfVwVfxNLp5WI6kAx0i8hG43CpbhduwOYRyJTUPaop6PrV0sKkdseyeN9hiDcR3DuFRqq37qpuipldDK8lvCE+/Tx2slintPZlBDSG4IqrA7KJkDEm/YsP/FW9PpCHkHzJWX49TQ1mZq66yj9HajauBKGPDrvqSbU5lnbb0daBWbMGpssWnA9KMiKDJ4pH++PpfA7of4=
+  gem: chefdk-julia
+  on:
+    tags: true
+    repo: Nordstrom/chefdk-julia
