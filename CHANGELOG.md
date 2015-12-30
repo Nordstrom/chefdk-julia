@@ -1,5 +1,8 @@
 # Changelog for chefdk-julia
 
+## 0.4.1
+* Add Travis-CI test and deploy support
+
 ## 0.4.0
 * Distribute chefdk-julia as a Ruby gem.
 
