@@ -17,7 +17,13 @@ require_relative 'lib/chefdk/julia/version'
 # ChefDK requires this metadata file to be able to load Julia as a cookbook, even
 # though Julia isn't a traditional cookbook that gets uploaded to Chef Server
 # and run by nodes.
-name 'chefdk-julia'
+
+# We need to get the basename of the chefdk-julia dir in gems/, e.g. chefdk-julia-0.4.2,
+# to make chef generate cookbook work. Otherwise we get this error:
+# ERROR: Could not find cookbook(s) to satisfy run list ["recipe[chefdk-julia-0.4.2::cookbook]"
+# See https://github.com/chef/chef-dk/issues/633
+name File.basename(File.dirname(__FILE__))
+
 description 'An Opinionated Cookbook Creator'
 long_description 'An Opinionated Cookbook Creator, with spunk and a grin, by Nordstrom'
 
