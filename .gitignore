@@ -13,3 +13,6 @@ bin/*
 
 # RSpec
 /spec/examples.txt
+
+# don't include lockfile in a gem
+/Gemfile.lock
