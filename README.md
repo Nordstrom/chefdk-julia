@@ -1,4 +1,5 @@
 # chefdk-julia
+<img src='https://raw.githubusercontent.com/Nordstrom/chefdk-julia/master/julia-icon.svg' style='float:left'/>
 An opinionated cookbook creator.
 
 _with spunk and a grin, by Nordstrom_
