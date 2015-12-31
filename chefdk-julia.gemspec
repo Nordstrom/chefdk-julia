@@ -18,7 +18,7 @@ require 'chefdk/julia/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'chefdk-julia'
-  spec.version       = Chefdk::Julia::VERSION
+  spec.version       = ChefDK::Julia::VERSION
   spec.authors       = ['Orion Ifland', 'Doug Ireton']
   spec.email         = ['orion.ifland@nordstrom.com', 'doug.ireton@nordstrom.com']
   spec.license       = 'Apache-2.0'
@@ -35,7 +35,9 @@ Gem::Specification.new do |spec|
   spec.post_install_message = <<-EOF
     Paste lines below into your ~/.chef/config.rb or knife.rb
 
-    require 'chefdk-julia'
-    chefdk.generator_cookbook Chefdk::Julia.path
+    if defined?(ChefDK::CLI)
+      require 'chefdk/julia'
+      chefdk.generator_cookbook ChefDK::Julia.path
+    end
   EOF
 end

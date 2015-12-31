@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module Chefdk
+module ChefDK
   # namespace for path method
   module Julia
     def self.path

@@ -27,4 +27,4 @@ name File.basename(File.dirname(__FILE__))
 description 'An Opinionated Cookbook Creator'
 long_description 'An Opinionated Cookbook Creator, with spunk and a grin, by Nordstrom'
 
-version Chefdk::Julia::VERSION
+version ChefDK::Julia::VERSION

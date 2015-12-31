@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module Chefdk
+module ChefDK
   # namespace for VERSION constant
   module Julia
-    VERSION = '0.4.2'
+    VERSION = '0.4.3'
   end
 end
