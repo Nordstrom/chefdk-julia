@@ -25,8 +25,10 @@ Add these lines to your `~/.chef/config.rb` or `~/.chef/knife.rb` configuration 
 
 ```ruby
 # Paste lines below into ~/.chef/config.rb or knife.rb
-require 'chefdk-julia'
-chefdk.generator_cookbook Chefdk::Julia.path
+if defined?(ChefDK::CLI)
+  require 'chefdk/julia'
+  chefdk.generator_cookbook ChefDK::Julia.path
+end
 ```
 
 ## Generating a cookbook

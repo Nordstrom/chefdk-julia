@@ -1,5 +1,8 @@
 # Changelog for chefdk-julia
 
+## 0.4.3
+* Update README and gem post-install message with correct require statement
+
 ## 0.4.2
 * Fix ERROR: Could not find cookbook(s) to satisfy run list ["recipe[chefdk-julia-0.4.1::cookbook]"]
   See https://github.com/chef/chef-dk/issues/633
