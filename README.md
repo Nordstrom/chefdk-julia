@@ -1,10 +1,11 @@
 # chefdk-julia
-<img src='https://raw.githubusercontent.com/Nordstrom/chefdk-julia/master/julia-icon.svg' style='float:left'/>
+<img src='https://cdn.rawgit.com/Nordstrom/chefdk-julia/master/julia-icon.svg' style='float:left'/>
 An opinionated cookbook creator.
 
 _with spunk and a grin, by Nordstrom_
 
 [![Build Status](https://travis-ci.org/Nordstrom/chefdk-julia.svg?branch=master)](https://travis-ci.org/Nordstrom/chefdk-julia)
+[![Gem Version](https://badge.fury.io/rb/chefdk-julia.svg)](https://badge.fury.io/rb/chefdk-julia)
 
 ## About
 Julia is a special type of Chef cookbook that is designed to generate code (cookbooks, recipes, templates, etc.).
