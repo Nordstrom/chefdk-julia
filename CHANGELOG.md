@@ -1,5 +1,8 @@
 # Changelog for chefdk-julia
 
+## Unreleased
+* Add "How is it better than the basic ChefDK generator?" section to README
+
 ## 0.4.3
 * Update README and gem post-install message with correct require statement
 
