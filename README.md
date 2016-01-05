@@ -15,6 +15,7 @@ Julia is a special type of Chef cookbook that is designed to generate code (cook
 ## How is it better than the basic ChefDK generator?
 
 Generated Cookbooks will contain:
+
 1. Rakefile with RuboCop, Foodcritic, and ChefSpec tasks.
 2. RSpec spec_helper.rb file setup to disallow global monkey-patching and allow focusing single tests.
 3. .rspec file which auto-requires spec_helper.rb in specs
