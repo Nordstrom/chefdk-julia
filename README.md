@@ -1,30 +1,38 @@
 # chefdk-julia
+[![Gem Version](https://badge.fury.io/rb/chefdk-julia.svg)](https://badge.fury.io/rb/chefdk-julia)
+[![Build Status](https://travis-ci.org/Nordstrom/chefdk-julia.svg?branch=master)](https://travis-ci.org/Nordstrom/chefdk-julia)
+
 <img src='https://cdn.rawgit.com/Nordstrom/chefdk-julia/master/julia-icon.svg' style='float:left'/>
+
 An opinionated cookbook creator.
 
-_with spunk and a grin, by Nordstrom_
-
-[![Build Status](https://travis-ci.org/Nordstrom/chefdk-julia.svg?branch=master)](https://travis-ci.org/Nordstrom/chefdk-julia)
-[![Gem Version](https://badge.fury.io/rb/chefdk-julia.svg)](https://badge.fury.io/rb/chefdk-julia)
+Julia makes it easy to generate full-featured starting cookbooks, recipes, templates, etc.
+with testing already setup (e.g. ChefSpec).
 
 ## About
 Julia is a special type of Chef cookbook that is designed to generate code (cookbooks, recipes, templates, etc.).
 
-It is based upon the default code_generator provided by ChefDK.
-(`chef generate generator`).
+## How is it better than the basic ChefDK generator?
+
+Generated Cookbooks will contain:
+1. Rakefile with RuboCop, Foodcritic, and ChefSpec tasks.
+2. RSpec spec_helper.rb file setup to disallow global monkey-patching and allow focusing single tests.
+3. .rspec file which auto-requires spec_helper.rb in specs
+4. .rubocop.yml file with line length set to 100.
+
 
 ## Prerequisites
 [ChefDK](https://downloads.chef.io/chef-dk/) must already be installed.
 
 ## Installation
-`chefdk-julia` is distributed as a Ruby Gem.
 
-Install it with `chef gem install` on the command line.
+### Install the Gem:
 
 ```bash
 > chef gem install chefdk-julia
 ```
 
+### Configure Your `knife.rb`:
 Add these lines to your `~/.chef/config.rb` or `~/.chef/knife.rb` configuration file:
 
 ```ruby
@@ -53,7 +61,6 @@ Orion Ifland, Doug Ireton
 
 Copyright (c) 2015 Nordstrom, Inc.
 
-```text
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -65,4 +72,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-```
