@@ -15,6 +15,6 @@
 module ChefDK
   # namespace for VERSION constant
   module Julia
-    VERSION = '0.4.3'
+    VERSION = '0.4.3'.freeze
   end
 end
