@@ -24,6 +24,11 @@ require_relative 'lib/chefdk/julia/version'
 # See https://github.com/chef/chef-dk/issues/633
 name File.basename(File.dirname(__FILE__))
 
+maintainer 'Nordstrom, Inc.'
+maintainer_email 'techcheftm@nordstrom.com'
+
+license 'Apache v2.0'
+
 description 'An Opinionated Cookbook Creator'
 long_description 'An Opinionated Cookbook Creator, with spunk and a grin, by Nordstrom'
 

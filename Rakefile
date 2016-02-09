@@ -22,7 +22,7 @@ RuboCop::RakeTask.new do |rubocop|
 end
 
 FoodCritic::Rake::LintTask.new do |foodcritic|
-  foodcritic.options[:fail_tags] = 'any'
+  foodcritic.options[:fail_tags] = %w(any)
 end
 
 RSpec::Core::RakeTask.new
