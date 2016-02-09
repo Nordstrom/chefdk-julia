@@ -25,12 +25,19 @@ FoodCritic::Rake::LintTask.new do |foodcritic|
   foodcritic.options[:fail_tags] = 'any'
 end
 
-RSpec::Core::RakeTask.new
+RSpec::Core::RakeTask.new(:chefspec)
 
 desc 'Run Rubocop and Foodcritic style checks'
 task style: [:rubocop, :foodcritic]
 
 desc 'Run all style checks and unit tests'
 task test: [:style, :spec]
+
+desc 'Generate ChefSpec coverage report'
+task :coverage do
+  ENV['COVERAGE'] = 'true'
+  Rake::Task[:chefspec].invoke
+end
+task spec: :chefspec
 
 task default: :test

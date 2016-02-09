@@ -42,11 +42,11 @@ end
 
 directories_to_create = %w( cookbooks data_bags )
 
-if context.use_roles
-  directories_to_create += %w( roles environments )
-else
-  directories_to_create += %w( policies )
-end
+directories_to_create += if context.use_roles
+                           %w( roles environments )
+                         else
+                           %w( policies )
+                         end
 
 directories_to_create.each do |tlo|
   remote_directory "#{repo_dir}/#{tlo}" do
