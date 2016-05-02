@@ -1,6 +1,7 @@
 # Changelog for chefdk-julia
 
-## Unreleased
+## 0.4.4
+* Fix foodcritic.options[:fail_tags] in generated cookbook Rakefile
 * Add "How is it better than the basic ChefDK generator?" section to README
 
 ## 0.4.3

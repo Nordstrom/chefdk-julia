@@ -33,3 +33,6 @@ description 'An Opinionated Cookbook Creator'
 long_description 'An Opinionated Cookbook Creator, with spunk and a grin, by Nordstrom'
 
 version ChefDK::Julia::VERSION
+
+source_url 'https://github.com/Nordstrom/chefdk-julia'
+issues_url 'https://github.com/Nordstrom/chefdk-julia/issues'
