@@ -13,3 +13,6 @@ bin/*
 
 # RSpec
 /spec/examples.txt
+
+# Gem-related
+/pkg/

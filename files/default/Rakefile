@@ -19,3 +19,9 @@ desc 'Run all style checks and unit tests'
 task test: [:style, :spec]
 
 task default: :test
+
+desc 'Generate ChefSpec coverage report'
+task :coverage do
+  ENV['COVERAGE'] = 'true'
+  Rake::Task[:spec].invoke
+end
