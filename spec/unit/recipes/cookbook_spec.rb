@@ -87,7 +87,7 @@ RSpec.describe 'chefdk-julia::cookbook' do
 
   it 'generated cookbook spec relies on --require spec_helper in .rspec file' do
     expect(chef_run).to render_file(File.join(new_cookbook_path, '.rspec')).with_content(
-      /--require spec_helper/
+      /^--require spec_helper$/
     )
 
     expect(chef_run).to render_file(
