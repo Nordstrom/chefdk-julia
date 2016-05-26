@@ -20,6 +20,7 @@ Generated Cookbooks will contain:
 2. RSpec spec_helper.rb file setup to disallow global monkey-patching and allow focusing single tests.
 3. .rspec file which auto-requires spec_helper.rb in specs
 4. .rubocop.yml file with line length set to 100.
+5. [InSpec](https://docs.chef.io/compliance.html#audit-resources) setup for integration testing instead of ServerSpec
 
 
 ## Prerequisites
