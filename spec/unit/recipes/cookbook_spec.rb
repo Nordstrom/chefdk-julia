@@ -15,22 +15,45 @@
 require 'chef-dk/generator'
 
 RSpec.describe 'chefdk-julia::cookbook' do
-  def generator_context(use_berkshelf: true)
-    double('generator_context',
-           cookbook_root: '/Users/my_user/chef/cookbooks',
-           cookbook_name: 'my_cookbook',
-           use_berkshelf: use_berkshelf,
-           have_git: true,
-           skip_git_init: false
-          )
-  end
+  let(:chef_run) { ChefSpec::SoloRunner.converge(described_recipe) }
+
+  let(:cookbook_root) { '/Users/my_user/chef/cookbooks' }
+  let(:cookbook_name) { 'my_cookbook' }
+  let(:new_cookbook_path) { File.join(cookbook_root, cookbook_name) }
+
+  let(:license) { 'all_rights' }
+  let(:copyright_holder) { 'Nordstrom' }
 
   before(:example) do
-    allow(ChefDK::Generator).to receive(:context).and_return(generator_context)
+    ChefDK::Generator.reset
+    ChefDK::Generator.add_attr_to_context(:use_berkshelf, true)
+    ChefDK::Generator.add_attr_to_context(:cookbook_root, cookbook_root)
+    ChefDK::Generator.add_attr_to_context(:cookbook_name, cookbook_name)
+    ChefDK::Generator.add_attr_to_context(:have_git, true)
+    ChefDK::Generator.add_attr_to_context(:skip_git_init, false)
+    ChefDK::Generator.add_attr_to_context(:license, license)
+    ChefDK::Generator.add_attr_to_context(:copyright_holder, copyright_holder)
   end
 
-  let(:chef_run) { ChefSpec::SoloRunner.converge(described_recipe) }
-  let(:new_cookbook_path) { '/Users/my_user/chef/cookbooks/my_cookbook' }
+  it 'creates a .kitchen.yml' do
+    expect(chef_run).to create_template_if_missing(
+      File.join(new_cookbook_path, '.kitchen.yml')
+    ).with(
+      source: 'kitchen.yml.erb'
+    )
+  end
+
+  it 'enables InSpec in the .kitchen.yml' do
+    expect(chef_run).to render_file(File.join(new_cookbook_path, '.kitchen.yml')).with_content(
+      /^  name: inspec$/
+    )
+  end
+
+  it '.kitchen.yml has a Windows 2012r2 platform' do
+    expect(chef_run).to render_file(File.join(new_cookbook_path, '.kitchen.yml')).with_content(
+      /  - name: windows-2012r2/
+    )
+  end
 
   it 'creates a stock .rspec config file if missing' do
     expect(chef_run).to create_cookbook_file_if_missing(
@@ -54,6 +77,34 @@ RSpec.describe 'chefdk-julia::cookbook' do
     )
   end
 
+  it 'uses SoloRunner in the generated cookbook spec' do
+    expect(chef_run).to render_file(
+      File.join(new_cookbook_path, '/spec/unit/recipes/default_spec.rb')
+    ).with_content(
+      /ChefSpec::SoloRunner\.new/
+    )
+  end
+
+  it 'generated cookbook spec relies on --require spec_helper in .rspec file' do
+    expect(chef_run).to render_file(File.join(new_cookbook_path, '.rspec')).with_content(
+      /--require spec_helper/
+    )
+
+    expect(chef_run).to render_file(
+      File.join(new_cookbook_path, '/spec/unit/recipes/default_spec.rb')
+    ).with_content { |content|
+      expect(content).to_not match(/^require ['"]spec_helper['"]$/)
+    }
+  end
+
+  it 'Generated InSpec spec has a valid example spec' do
+    expect(chef_run).to render_file(
+      File.join(
+        new_cookbook_path, '/test/integration/default/default_spec.rb'
+      )
+    ).with_content(/^describe command/)
+  end
+
   context 'when generating a cookbook which uses Berkshelf' do
     it 'creates a spec_helper if missing' do
       expect(chef_run).to create_template_if_missing(
@@ -72,9 +123,7 @@ RSpec.describe 'chefdk-julia::cookbook' do
 
   context 'when generating a cookbook which uses Policyfiles' do
     before(:example) do
-      allow(ChefDK::Generator).to receive(:context).and_return(
-        generator_context(use_berkshelf: false)
-      )
+      ChefDK::Generator.add_attr_to_context(:use_berkshelf, false)
     end
 
     it 'creates a spec_helper which requires chefspec/policyfile' do

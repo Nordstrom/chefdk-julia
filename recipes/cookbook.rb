@@ -44,7 +44,7 @@ else
   end
 end
 
-# Test-kitchen and ServerSpec
+# Test-kitchen and InSpec
 template "#{cookbook_dir}/.kitchen.yml" do
   if context.use_berkshelf
     source 'kitchen.yml.erb'
@@ -55,22 +55,13 @@ template "#{cookbook_dir}/.kitchen.yml" do
   action :create_if_missing
 end
 
-directory "#{cookbook_dir}/test/integration/default/serverspec" do
+directory "#{cookbook_dir}/test/integration/default" do
   recursive true
 end
 
-template "#{cookbook_dir}/test/integration/default/serverspec/default_spec.rb" do
-  source 'serverspec_default_spec.rb.erb'
+template "#{cookbook_dir}/test/integration/default/default_spec.rb" do
+  source 'inspec_default_spec.rb.erb'
   helpers(ChefDK::Generator::TemplateHelper)
-  action :create_if_missing
-end
-
-directory "#{cookbook_dir}/test/integration/helpers/serverspec" do
-  recursive true
-end
-
-cookbook_file "#{cookbook_dir}/test/integration/helpers/serverspec/spec_helper.rb" do
-  source 'serverspec_spec_helper.rb'
   action :create_if_missing
 end
 

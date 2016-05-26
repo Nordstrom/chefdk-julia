@@ -23,7 +23,7 @@ Generated Cookbooks will contain:
 
 
 ## Prerequisites
-[ChefDK](https://downloads.chef.io/chef-dk/) must already be installed.
+[ChefDK](https://downloads.chef.io/chef-dk/) version 0.10 or greater must already be installed.
 
 ## Installation
 

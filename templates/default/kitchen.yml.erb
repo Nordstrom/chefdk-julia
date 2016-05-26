@@ -5,14 +5,15 @@ driver:
 provisioner:
   name: chef_zero
 
-# Uncomment the following verifier to leverage Inspec instead of Busser (the
-# default verifier)
-# verifier:
-#   name: inspec
+verifier:
+  name: inspec
 
 platforms:
-  - name: ubuntu-14.04
-  - name: centos-7.1
+  - name: ubuntu-16.04
+  - name: centos-7.2
+  - name: windows-2012r2
+    driver_config:
+      box: mwrock/Windows2012R2
 
 suites:
   - name: default

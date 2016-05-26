@@ -1,7 +1,25 @@
 # Changelog for chefdk-julia
 
+## 1.0.0
+* Set InSpec as the verifier in generated .kitchen.yml [#22](https://github.com/Nordstrom/chefdk-julia/issues/22)
+
+* Remove support for ServerSpec
+
+* Switch from ServerRunner to SoloRunner in generated specs [#21](https://github.com/Nordstrom/chefdk-julia/issues/21)
+
+* Remove `require 'spec_helper'` line from generated specs [#20](https://github.com/Nordstrom/chefdk-julia/issues/20)
+
+* Remove berksfile.lock from generated .gitignore [#18](https://github.com/Nordstrom/chefdk-julia/issues/18)
+
+* Add minimum ChefDK version in README [#14](https://github.com/Nordstrom/chefdk-julia/issues/14)
+
+* Add Windows platform to generated .kitchen.yml
+
+* Add ChefSpec coverage task to generated Rakefile
+
 ## 0.4.4
 * Fix foodcritic.options[:fail_tags] in generated cookbook Rakefile
+
 * Add "How is it better than the basic ChefDK generator?" section to README
 
 ## 0.4.3
