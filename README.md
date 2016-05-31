@@ -7,7 +7,7 @@
 An opinionated cookbook creator.
 
 Julia makes it easy to generate full-featured starting cookbooks, recipes, templates, etc.
-with testing already setup (e.g. ChefSpec).
+with testing already set up (e.g. ChefSpec).
 
 ## About
 Julia is a special type of Chef cookbook that is designed to generate code (cookbooks, recipes, templates, etc.).
@@ -17,10 +17,10 @@ Julia is a special type of Chef cookbook that is designed to generate code (cook
 Generated Cookbooks will contain:
 
 1. Rakefile with RuboCop, Foodcritic, and ChefSpec tasks.
-2. RSpec spec_helper.rb file setup to disallow global monkey-patching and allow focusing single tests.
+2. RSpec spec_helper.rb file set up to disallow global monkey-patching and allow focusing single tests.
 3. .rspec file which auto-requires spec_helper.rb in specs
 4. .rubocop.yml file with line length set to 100.
-5. [InSpec](https://docs.chef.io/compliance.html#audit-resources) setup for integration testing instead of ServerSpec
+5. [InSpec](https://docs.chef.io/compliance.html#audit-resources) set up for integration testing instead of ServerSpec
 
 
 ## Prerequisites
